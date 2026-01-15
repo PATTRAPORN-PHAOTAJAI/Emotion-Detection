@@ -177,7 +177,7 @@ export default function Home() {
   // 3) Load ONNX model + classes
   async function loadModel() {
     const session = await ort.InferenceSession.create(
-      "/models/emotion_yolo11n_cls.onnx",
+      "./models/emotion_yolo.onnx",
       { executionProviders: ["wasm"] }
     );
     sessionRef.current = session;
@@ -322,7 +322,7 @@ export default function Home() {
         setEmotion(classes[maxIdx] ?? `class_${maxIdx}`);
         setConf(probs[maxIdx] ?? 0);
 
-        ctx.fillStyle = "rgba(0,0,0,0.6)";
+        ctx.fillStyle = "rgba(30, 9, 9, 0.6)";
         ctx.fillRect(bestRect.x, Math.max(0, bestRect.y - 28), 220, 28);
         ctx.fillStyle = "white";
         ctx.font = "16px sans-serif";
@@ -366,18 +366,18 @@ export default function Home() {
 
   return (
     <main className="min-h-screen p-6 space-y-4">
-      <h1 className="text-2xl font-bold">Face Emotion (OpenCV + YOLO11-CLS)</h1>
+      <h1 className="text-2xl font-bold text-blue-900 text-center ">Face Emotion (OpenCV + YOLO11-CLS)</h1>
 
       <div className="space-y-2">
-        <div className="text-sm">สถานะ: {status}</div>
-        <div className="text-sm">
+        <div className="text-sm text-blue-400">สถานะ: {status}</div>
+        <div className="text-sm text-blue-700">
           Emotion: <b>{emotion}</b> | Conf: <b>{(conf * 100).toFixed(1)}%</b>
         </div>
       </div>
 
       <div className="flex gap-3">
         <button
-          className="px-4 py-2 rounded bg-black text-white"
+          className="px-4 py-2 rounded bg-blue-400 text-white"
           onClick={startCamera}
         >
           Start Camera
